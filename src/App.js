@@ -80,7 +80,7 @@ function App() {
         {/* 컴포넌트 반복 */}
         {
           shoes.map((a, idx)=>{
-            return <Card shoes={shoes[idx]} i={idx}/>
+            return <Card shoes={shoes[idx]} i={idx} key={idx} />
           })
         }
 
