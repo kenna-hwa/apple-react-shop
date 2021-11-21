@@ -8,6 +8,23 @@ function App() {
   let [shoes, shoes변경] = useState(Data);
 
 
+  //내코드
+  // function ProductList(){
+
+  //   return shoes.map(function(shoes){
+  //     return (<div className="col-md-4">
+  //     <img
+  //       alt={ shoes.id }
+  //       src={`https://codingapple1.github.io/shop/shoes` + (shoes.id + 1) + `.jpg`}
+  //     />
+  //     <h4>{ shoes.title }</h4>
+  //     <p>{ shoes.content }</p>
+  //     <p>{ shoes.price }</p>
+  //   </div>)
+  //   })
+  // }
+
+
 
   return (
     <div className="App">
@@ -49,58 +66,82 @@ function App() {
       <div className="container">
         <div className="row">
 
-          {shoes.map(
-            function(shoe, idx){
-              console.log(shoe)
-              return(
-                <div className="col-md-4">
-                <img
-                  alt={idx}
-                  src="https://codingapple1.github.io/shop/shoes1.jpg"
-                />
-                <h4>{ shoe[idx].title }</h4>
-                <p>{ shoe[idx].content }</p>
-                <p>{ shoe[idx].price }</p>
-              </div>
-              )
-            }
-          )}
 
-          <div className="col-md-4">
-            <img
-              alt="shoes1"
-              src="https://codingapple1.github.io/shop/shoes1.jpg"
-            />
-            <h4>{ shoes[0].title }</h4>
-            <p>{ shoes[0].content }</p>
-            <p>{ shoes[0].price }</p>
-          </div>
-          <div className="col-md-4">
-            <img
-              alt="shoes2"
-              src="https://codingapple1.github.io/shop/shoes2.jpg"
-            />
-            <h4>{ shoes[1].title }</h4>
-            <p>{ shoes[1].content }</p>
-            <p>{ shoes[1].price }</p>
-          </div>
-          <div className="col-md-4">
-            <img
-              alt="shoes3"
-              src="https://codingapple1.github.io/shop/shoes3.jpg"
-            />
-            <h4>{ shoes[2].title }</h4>
-            <p>{ shoes[2].content }</p>
-            <p>{ shoes[2].price }</p>
-          </div>
+        {/* 컴포넌트 내 반복문 사용 */}
+        {/* <Card shoes={shoes} /> */}
 
+
+        {/* 여러개 컴포넌트 사용 */}
+        {/* <Card shoes={shoes[0]} />
+        <Card shoes={shoes[1]} />
+        <Card shoes={shoes[2]} />
+        <Card shoes={shoes[3]} /> */}
+
+        {/* 컴포넌트 반복 */}
+        {
+          shoes.map((a, idx)=>{
+            return <Card shoes={shoes[idx]} i={idx}/>
+          })
+        }
 
         </div>
       </div>
     </div>
   );
+
+
+
+
+
+
 }
 
+
+//map 사용해서 컴포넌트 내에서 반복하기
+  // function Card(props){
+
+  //   return props.shoes.map(function(shoes){
+  //         return (<div className="col-md-4">
+  //         <img
+  //           alt={ shoes.id }
+  //           src={`https://codingapple1.github.io/shop/shoes` + (shoes.id + 1) + `.jpg`}
+  //         />
+  //         <h4>{ shoes.title }</h4>
+  //         <p>{ shoes.content }</p>
+  //         <p>{ shoes.price }</p>
+  //       </div>)
+  //       })
+  // }
+
+  //컴포넌트 여러개 생성해서 props 각각 전달하기 
+  // function Card(props){
+
+  //         return (<div className="col-md-4">
+  //         <img
+  //           alt={ props.shoes.id }
+  //           src={`https://codingapple1.github.io/shop/shoes` + (props.shoes.id + 1) + `.jpg`}
+  //         />
+  //         <h4>{ props.shoes.title }</h4>
+  //         <p>{ props.shoes.content }</p>
+  //         <p>{ props.shoes.price }</p>
+  //       </div>)
+        
+  // }
+
+  //컴포넌트 자체 반복하기
+  function Card(props){
+
+    return (<div className="col-md-4">
+    <img
+      alt={ props.shoes.id }
+      src={`https://codingapple1.github.io/shop/shoes` + (props.i + 1) + `.jpg`}
+    />
+    <h4>{ props.shoes.title }</h4>
+    <p>{ props.shoes.content }</p>
+    <p>{ props.shoes.price }</p>
+  </div>)
+  
+}
 export default App;
 
 

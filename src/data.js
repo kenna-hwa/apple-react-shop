@@ -1,4 +1,4 @@
-export default [
+var data = [
     {
       id : 0,
       title : "White and Black",
@@ -18,5 +18,14 @@ export default [
       title : "Grey Yordan",
       content : "Born in the States",
       price : 130000
-    }
+    },
+
+    {
+      id : 4,
+      title : "Red Vans",
+      content : "Born in Madrid",
+      price : 120000
+    },
   ] 
+
+export default data;
