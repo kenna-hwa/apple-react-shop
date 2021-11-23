@@ -3,7 +3,6 @@ import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "./App.css";
 import Main from "./Main"
 import Data from "./data";
-
 import Detail from "./Detail"
 
 import { Link, Route, Switch } from 'react-router-dom'
@@ -51,11 +50,9 @@ function App() {
       <Route exact path="/">
         <Main shoes={ shoes } />
       </Route>
-      <Route exact path="/detail">
+      <Route path="/detail/:id">
+        {/* 파라미터  id 부분은 내가 작명 */}
         <Detail shoes={ shoes } />
-      </Route>
-      <Route path="/:id">
-        <div>아무거나적었을때이거보여줘</div>
       </Route>
 
       </Switch>
