@@ -20,17 +20,27 @@ div.container{
     }
 
     .my-alert{
-        margin: 0 auto;
-        width: 20vw;
-        height: 26px;
-        color: #ff33ee;
-        border: 1px solid #888;
-        padding: 5px;
-        border-radius: 15px;
-        line-height: 16px;
+        @mixin 함수(){
+            margin: 0 auto;
+            width: 20vw;
+            height: 26px;
+            color: #ff33ee;
+            border: 1px solid #888;
+            padding: 5px;
+            border-radius: 15px;
+            line-height: 16px;
+        }
+        @include 함수();
 
         p{
             color: brown;
         }
     }
+
+    .my-alert2{
+        @extend .my-alert;
+        background: #ffe591;
+    }
+
+    
 }
