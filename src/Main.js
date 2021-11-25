@@ -47,6 +47,8 @@ function Main(props) {
             return <Card item={a} key={idx} />;
           })}
         </div>
+
+
       </div>
     </>
   );

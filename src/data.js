@@ -19,13 +19,6 @@ var data = [
       content : "Born in the States",
       price : 130000
     },
-
-    {
-      id : 4,
-      title : "Red Vans",
-      content : "Born in Madrid",
-      price : 120000
-    },
   ] 
 
 export default data;
