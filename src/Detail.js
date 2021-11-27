@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from 'react-router-dom';
 import styled from "styled-components";
+import { Nav } from "react-bootstrap";
 import './Detail.scss'
 import Info from './Info.js';
 
@@ -20,6 +21,8 @@ function Detail(props){
     // let [인풋, 인풋변경] = useState('')
     let history = useHistory();
     let { id } = useParams();
+    //tab
+    let [누른탭, 누른탭변경] = useState(0);
 
     useEffect(() => {
         // 컴포넌트가 실행될 때 같이 계속 실행됨 (componentDidMount)
@@ -92,20 +95,43 @@ function Detail(props){
               <p>{찾은상품.price}</p>
               <Info info={props.info[id]} />
               <button className="btn btn-danger" onClick={()=>{ 
-                  console.log(props)
+                //   console.log(props)
                   let Array = [...props.info]
                   Array[id] = Array[id]-1
-                    props.재고변경(Array);
+                    // props.재고변경(Array);
                   }}>주문하기</button> 
               <button className="btn btn-danger" onClick={()=>{ history.goBack()
             //history.push('/원하는url')
             }}>뒤로가기</button> 
             </div>
+
+            <Nav className="mt-5 " variant="tabs" defaultActiveKey="link-0">
+                <Nav.Item>
+                    <Nav.Link className="mt-5" eventKey="link-0" onClick={()=>{누른탭변경(0)}}>1번</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link className="mt-5" eventKey="link-1" onClick={()=>{누른탭변경(1)}}>2번</Nav.Link>
+                </Nav.Item>
+            </Nav>  
+        <TabContent 누른탭={누른탭}/>
+
           </div>
       </div> 
     )
 }
 
+
+function TabContent(props){
+
+    if(props.누른탭 === 0){
+        return <div className="mt-5 mb-5" >0번째입니다.</div>
+    }else if(props.누른탭 === 1){
+        return <div className="mt-5 mb-5" >1번째입니다.</div>
+    }else if(props.누른탭 === 2){
+        return <div className="mt-5 mb-5" >2번째입니다.</div>
+    }
+
+}
 
 
 

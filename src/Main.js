@@ -1,7 +1,13 @@
-import React, { useState } from "react";
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from "react";
+import { Link } from 'react-router-dom';
+import {재고context} from './App.js';
+import axios from 'axios';
+import Loading from "./Loading";
 
 function Main(props) {
+
+  let 재고 = useContext(재고context);
+
   //내코드
   // function ProductList(){
 
@@ -47,9 +53,59 @@ function Main(props) {
             return <Card item={a} key={idx} />;
           })}
         </div>
+        <button className="btn btn-primary" onClick={() => { 
 
+//로딩중이라는 UI 띄움
+props.로딩상태변경(true);
+
+
+  //서버에게 post 요청
+
+  //axios.post('서버URL', { id : 'adbc', pw : 1234 });
+
+  //서버에 header 요청...
+  //서버에게 쿠키 요청...
+  
+  //서버에게 get 요청
+
+  axios.get('https://codingapple1.github.io/shop/data2.json')
+  .then((res)=>{
+  //로딩중이라는 UI 삭제 (이제 성공함)
+
+  props.로딩상태변경(false);
+
+   /* let 데이터추가 = () => {
+       내 코드
+        let newShoes = [...shoes];
+        let newData = [...res.data]
+        newData.map((a)=>{
+          newShoes.push(a);
+        });
+
+        shoes변경(newShoes);
+        console.log(newShoes)
+
+        
+    }
+    데이터추가()*/
+
+    props.shoes변경([...props.shoes, ...res.data])
+  }//성공
+  ) 
+  .catch(()=>{
+  //로딩중이라는 UI 삭제 (이제 성공함)
+  props.로딩상태변경(false);
+  console.log("실패")
+  }) 
+  //실패
+  
+}
+}>더보기</button>
+
+{props.로딩상태 ? <Loading /> : null}
 
       </div>
+      
     </>
   );
 }
@@ -87,6 +143,9 @@ function Main(props) {
 
 //컴포넌트 자체 반복하기
 function Card(props) {
+
+  let 재고 = useContext(재고context);
+
   return (
     <div className="col-md-4">
 
@@ -103,6 +162,7 @@ function Card(props) {
         <h4>{props.item.title}</h4>
         <p>{props.item.content}</p>
         <p>{props.item.price}</p>
+        <p>수량 : {재고[props.item.id]}</p>
     </Link>
     </div>
   );
