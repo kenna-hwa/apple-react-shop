@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Nav } from "react-bootstrap";
 import './Detail.scss'
 import Info from './Info.js';
+import { CSSTransition } from 'react-transition-group';
 
 let 박스 = styled.div`
 padding : 20px;
@@ -23,6 +24,7 @@ function Detail(props){
     let { id } = useParams();
     //tab
     let [누른탭, 누른탭변경] = useState(0);
+    let [스위치, 스위치변경] = useState(false);
 
     useEffect(() => {
         // 컴포넌트가 실행될 때 같이 계속 실행됨 (componentDidMount)
@@ -107,14 +109,15 @@ function Detail(props){
 
             <Nav className="mt-5 " variant="tabs" defaultActiveKey="link-0">
                 <Nav.Item>
-                    <Nav.Link className="mt-5" eventKey="link-0" onClick={()=>{누른탭변경(0)}}>1번</Nav.Link>
+                    <Nav.Link className="mt-5" eventKey="link-0" onClick={()=>{ 스위치변경(false); 누른탭변경(0)}}>1번</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                    <Nav.Link className="mt-5" eventKey="link-1" onClick={()=>{누른탭변경(1)}}>2번</Nav.Link>
+                    <Nav.Link className="mt-5" eventKey="link-1" onClick={()=>{스위치변경(false); 누른탭변경(1)}}>2번</Nav.Link>
                 </Nav.Item>
             </Nav>  
-        <TabContent 누른탭={누른탭}/>
-
+        <CSSTransition in={스위치} classNames="wow" timeout={500}>
+        <TabContent 누른탭={누른탭} 스위치변경={스위치변경}/>
+        </CSSTransition>
           </div>
       </div> 
     )
@@ -122,6 +125,10 @@ function Detail(props){
 
 
 function TabContent(props){
+
+    useEffect(()=>{
+        props.스위치변경(true);
+    });
 
     if(props.누른탭 === 0){
         return <div className="mt-5 mb-5" >0번째입니다.</div>
