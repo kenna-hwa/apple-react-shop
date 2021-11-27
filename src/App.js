@@ -14,6 +14,7 @@ function App() {
 
   let [shoes, shoes변경] = useState(Data);
   let [로딩상태, 로딩상태변경] = useState(false);
+  let [재고, 재고변경] = useState([10,11,12]);
 
 
   return (
@@ -53,7 +54,7 @@ function App() {
       </Route>
       <Route path="/detail/:id">
         {/* 파라미터  id 부분은 내가 작명 */}
-        <Detail shoes={ shoes } />
+        <Detail shoes={ shoes } info={재고} 재고변경={재고변경} />
       </Route>
 
       </Switch>

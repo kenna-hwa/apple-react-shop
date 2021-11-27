@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import './Detail.scss'
+import Info from './Info.js';
 
 let 박스 = styled.div`
 padding : 20px;
@@ -16,7 +17,7 @@ function Detail(props){
 
     // alert를 컴포넌트처럼 상태로 만들기
     let [alert, alert변경] = useState(true);
-    let [인풋, 인풋변경] = useState('')
+    // let [인풋, 인풋변경] = useState('')
     let history = useHistory();
     let { id } = useParams();
 
@@ -73,8 +74,8 @@ function Detail(props){
             <제목 className="red">Detail</제목>
             </박스>
         
-        <input onChange={(e)=>{인풋변경(e.target.value)}} />
-        {인풋}
+        {/* <input onChange={(e)=>{인풋변경(e.target.value)}} />
+        {인풋} */}
         {alert ? <div className="my-alert2"><p>재고가 얼마 남지 않았습니다!</p></div> : null}
         
         <div className="row">
@@ -89,7 +90,13 @@ function Detail(props){
               <h4 className="pt-5">{찾은상품.title}</h4>
               <p>{찾은상품.content}</p>
               <p>{찾은상품.price}</p>
-              <button className="btn btn-danger">주문하기</button> 
+              <Info info={props.info[id]} />
+              <button className="btn btn-danger" onClick={()=>{ 
+                  console.log(props)
+                  let Array = [...props.info]
+                  Array[id] = Array[id]-1
+                    props.재고변경(Array);
+                  }}>주문하기</button> 
               <button className="btn btn-danger" onClick={()=>{ history.goBack()
             //history.push('/원하는url')
             }}>뒤로가기</button> 
