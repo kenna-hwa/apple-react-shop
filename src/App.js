@@ -4,8 +4,7 @@ import "./App.css";
 import Main from "./Main"
 import Data from "./data";
 import Detail from "./Detail";
-import Loading from "./Loading";
-import axios from 'axios';
+import Cart from "./Cart";
 import { Link, Route, Switch } from 'react-router-dom'
 
 export let 재고context = React.createContext();
@@ -59,6 +58,11 @@ function App() {
       <재고context.Provider value={재고}>
         <Detail shoes={ shoes } info={재고} 재고변경={재고변경} />
       </재고context.Provider>
+      </Route>
+      <Route exact path="/cart">
+
+        <Cart shoes={ shoes } shoes변경={shoes변경} 로딩상태={로딩상태} 로딩상태변경={로딩상태변경}/>
+
       </Route>
       </Switch>
      
