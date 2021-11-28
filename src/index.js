@@ -6,9 +6,44 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 
-let store = createStore(()=>{
-  return [{ id : 0, name: '멋진 신발', quan: 2 }, { id : 1, name: '예쁜 신발', quan: 5 }, { id : 2, name: '더 멋진 신발', quan: 4 }, { id : 3, name: '웅장한 신발', quan: 2 }, { id : 4, name: '작은 신발', quan: 2 }, { id : 5, name: '높은 신발', quan: 7 }, { id : 6, name: '낮은 신발', quan: 4 }]
-}); // 리턴하는 콜백함수 넣기
+// let store = createStore(()=>{
+//   return [{ id : 0, name: '멋진 신발', quan: 2 }, { id : 1, name: '예쁜 신발', quan: 5 }, { id : 2, name: '더 멋진 신발', quan: 4 }, { id : 3, name: '웅장한 신발', quan: 2 }, { id : 4, name: '작은 신발', quan: 2 }, { id : 5, name: '높은 신발', quan: 7 }, { id : 6, name: '낮은 신발', quan: 4 }]
+// }); // 리턴하는 콜백함수 넣기
+
+
+
+
+//데이터 수정하는 방법 정의
+
+//기본값을 설정해주고
+let 기본state = [{ id : 0, name: '멋진 신발', quan: 2 }, { id : 1, name: '예쁜 신발', quan: 5 }, { id : 2, name: '더 멋진 신발', quan: 4 }, { id : 3, name: '웅장한 신발', quan: 2 }, { id : 4, name: '작은 신발', quan: 2 }, { id : 5, name: '높은 신발', quan: 7 }, { id : 6, name: '낮은 신발', quan: 4 }]
+
+
+//reducer(데이터수정함수)설정
+//state=기본state는 default parameter 문법으로 ES6문법
+ function reducer(state=기본state, 액션){
+   if(액션.type === '수량증가'){
+     let 카피 = [...state];
+     카피[0].quan++;
+     return 카피;
+     //return 수정된state
+
+   }else if(액션.type === '수량감소'){
+    let 카피 = [...state];
+    카피[0].quan--;
+    return 카피;
+    //return 수정된state
+
+  }else{
+    return state;
+   }
+  //reducer 함수는 항상 state 데이터를 뱉어야함
+ }
+
+
+//store를 설정
+let store = createStore(reducer);
+
 
 ReactDOM.render(
   <React.StrictMode>
