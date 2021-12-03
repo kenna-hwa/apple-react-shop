@@ -61,7 +61,7 @@ function App() {
       </Route>
       <Route exact path="/cart">
 
-        <Cart shoes={ shoes } shoes변경={shoes변경} 로딩상태={로딩상태} 로딩상태변경={로딩상태변경}/>
+        <Cart />
 
       </Route>
       </Switch>

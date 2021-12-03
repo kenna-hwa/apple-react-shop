@@ -28,20 +28,33 @@ let alert초기값 = true;
  function reducer(state=기본state, 액션){
     if(액션.type === "항목추가"){
 
+      //id가 같은 상품이 state에 있으면 push 하지 말고 id가 같은 상품의 quan 을 1 증가
+      let found = state.findIndex((a)=>{
+        return a.id = 액션.payload.id;
+      })
+      if(found >= 0){
+      let copy = [...state];  
+      copy[found].quan = 액션.payload.quan;
+      return copy
+
+      }else{
       let copy = [...state];
-      copy.push(액션.payload);
-      return copy;
+
+        copy.push(액션.payload);
+        return copy;
+      }
+
 
     } else if(액션.type === '수량증가'){
 
      let 카피 = [...state];
-     카피[0].quan++;
+     카피[액션.data].quan++;
      return 카피;
      //return 수정된state
 
    }else if(액션.type === '수량감소'){
     let 카피 = [...state];
-    카피[0].quan--;
+    카피[액션.data].quan--;
     return 카피;
     //return 수정된state
 

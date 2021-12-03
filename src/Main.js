@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useHistory } from "react";
 import { Link } from "react-router-dom";
 import { 재고context } from "./App.js";
 import axios from "axios";
@@ -144,10 +144,12 @@ function Main(props) {
 //컴포넌트 자체 반복하기
 function Card(props) {
   let 재고 = useContext(재고context);
-
+  // let history = useHistory();
+  // onClick={()=> { history.push(`/detail/`+props.i) }}
   return (
-    <div className="col-md-4">
-      <Link to={"/detail/" + props.item.id}>
+    <div className="col-md-4" >
+    <Link to={"/detail/" + props.item.id}>
+      
         <img
           alt={props.item.id}
           src={
@@ -161,7 +163,7 @@ function Card(props) {
         <p>{props.item.content}</p>
         <p>{props.item.price}</p>
         <p>수량 : {재고[props.item.id]}</p>
-      </Link>
+    </Link>
     </div>
   );
 }

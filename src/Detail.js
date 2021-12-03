@@ -103,10 +103,10 @@ function Detail(props){
                    let Array = [...props.info]
                    Array[id] = Array[id]-1
                   props.dispatch({ type: "항목추가", payload :{ id: 찾은상품.id, name: 찾은상품.title, quan: {수량}} })
-            history.push('/cart');
+                  history.push('/cart');
             }}>장바구니</button>
               <button className="btn btn-danger" onClick={()=>{ 
-                 console.log({수량})
+                 
                   let Array = [...props.info]
                   Array[id] = Array[id]-1
                     // props.재고변경(Array);
