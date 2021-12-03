@@ -5,6 +5,7 @@ import { Nav } from "react-bootstrap";
 import './Detail.scss'
 import Info from './Info.js';
 import { CSSTransition } from 'react-transition-group';
+import { connect } from "react-redux";
 
 let 박스 = styled.div`
 padding : 20px;
@@ -25,6 +26,7 @@ function Detail(props){
     //tab
     let [누른탭, 누른탭변경] = useState(0);
     let [스위치, 스위치변경] = useState(false);
+    let [수량, 수량변경] = useState(0);
 
     useEffect(() => {
         // 컴포넌트가 실행될 때 같이 계속 실행됨 (componentDidMount)
@@ -95,9 +97,16 @@ function Detail(props){
               <h4 className="pt-5">{찾은상품.title}</h4>
               <p>{찾은상품.content}</p>
               <p>{찾은상품.price}</p>
+              <span> 구매수량 : </span> <input className="input" type="text" onChange={(e)=>{수량변경(e.target.value)}} />
               <Info info={props.info[id]} />
+              <button  className="btn btn-danger" onClick={()=>{
+                   let Array = [...props.info]
+                   Array[id] = Array[id]-1
+                  props.dispatch({ type: "항목추가", payload :{ id: 찾은상품.id, name: 찾은상품.title, quan: {수량}} })
+            history.push('/cart');
+            }}>장바구니</button>
               <button className="btn btn-danger" onClick={()=>{ 
-                //   console.log(props)
+                 console.log({수량})
                   let Array = [...props.info]
                   Array[id] = Array[id]-1
                     // props.재고변경(Array);
@@ -139,18 +148,14 @@ function TabContent(props){
     }
 
 }
-
-
-
-export default Detail;
-
-
-class Detail2 extends React.Component{
-    componentDidMount(){
-// 컴포넌트가 실행되기 시작할 때
-// ajax 같은 것들을 여기에 넣는다.
-    }
-    componentWillUnmount(){
-// 컴포넌트가 시야에서 사라질 때
+function makeProps(state){
+    return {
+        state : state.reducer,
+        alert열렸니 : state.reducer2
+        //store안에 있던 모든 데이터를 state라는 이름의 props로 바꿈
     }
 }
+ 
+
+
+export default connect(makeProps)(Detail);
