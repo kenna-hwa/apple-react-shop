@@ -35,7 +35,7 @@ let alert초기값 = true;
       if(found >= 0){
       let copy = [...state];  
       copy[found].quan = 액션.payload.quan;
-      return copy
+      return copy;
 
       }else{
       let copy = [...state];

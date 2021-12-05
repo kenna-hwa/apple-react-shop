@@ -28,6 +28,19 @@ function Detail(props){
     let [스위치, 스위치변경] = useState(false);
     let [수량, 수량변경] = useState(0);
 
+
+    useEffect( ()=>{
+        
+        var arr = localStorage.getItem('watched');
+        arr = JSON.parse(arr);
+        
+        arr.push(id);
+        arr = new Set(arr);
+        arr = [...arr];
+        localStorage.setItem('watched', JSON.stringify(arr) );
+      
+      },[]);
+
     useEffect(() => {
         // 컴포넌트가 실행될 때 같이 계속 실행됨 (componentDidMount)
 

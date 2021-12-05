@@ -1,0 +1,9 @@
+
+.now-container{
+    width: 100%;
+    height: 80px;
+    background-color: pink;
+    font-weight: bold;
+    padding: 10px;
+    box-sizing: border-box;
+  }

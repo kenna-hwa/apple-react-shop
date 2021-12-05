@@ -147,7 +147,7 @@ function Card(props) {
   // let history = useHistory();
   // onClick={()=> { history.push(`/detail/`+props.i) }}
   return (
-    <div className="col-md-4" >
+    <div className="col-md-4"  >
     <Link to={"/detail/" + props.item.id}>
       
         <img

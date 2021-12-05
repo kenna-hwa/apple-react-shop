@@ -1,11 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, lazy, Suspense, memo } from "react";
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import "./App.css";
-import Main from "./Main"
+import Main from "./Main";
 import Data from "./data";
-import Detail from "./Detail";
 import Cart from "./Cart";
-import { Link, Route, Switch } from 'react-router-dom'
+import Now from "./Now";
+import { Link, Route, Switch } from 'react-router-dom';
+
+//import Detail from "./Detail";
+let Detail = lazy(()=>{ return import('./Detail.js') });
+
 
 export let 재고context = React.createContext();
 
@@ -22,7 +26,7 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">Shoeshop</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">Shoeshop</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -45,7 +49,7 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
+      <Now shoes={ shoes } />
       <Switch>
         {/* 택1 해주세요 중복비허용*/}
       <Route exact path="/">
@@ -56,7 +60,9 @@ function App() {
       <Route exact path="/detail/:id">
         {/* 파라미터  id 부분은 내가 작명 */}
       <재고context.Provider value={재고}>
+        <Suspense fallback={<div>로딩중이에요</div>}>
         <Detail shoes={ shoes } info={재고} 재고변경={재고변경} />
+        </Suspense>
       </재고context.Provider>
       </Route>
       <Route exact path="/cart">
